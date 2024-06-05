@@ -31,7 +31,7 @@ function LoginPage() {
 
       authenticateUser();
 
-      navigate("/user/:id");
+      navigate(`/user`);
     } catch (error) {
       console.log(error);
 
