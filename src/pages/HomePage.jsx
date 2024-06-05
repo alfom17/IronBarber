@@ -1,17 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
 
-function Home(){
+function HomePage(){
 
-    const navigate = useNavigate();
 
     return (
         <div>
-            <div>
+            <div>  
+                <h2>Necesitamos que se registre para coger la cita</h2>
 
-                <button>
+                <Link to={"/signup"}>Registrate Aqui</Link>
 
-                </button>
+                <br />
+
+                <h3>Ya estas registrado?</h3>
+
+                <Link to={"/login"}>Accede aqui</Link>
+                
             
             </div>
         </div>
@@ -19,4 +25,4 @@ function Home(){
 }
 
 
-export default Home
+export default HomePage
