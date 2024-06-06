@@ -19,7 +19,9 @@ import RevisionPage from "./pages/RevisionPage";
 function App() {
   return (
     <div>
+
       <Navbar />
+    <div>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -33,6 +35,7 @@ function App() {
         {/* <Route path="/not-found" element={<NotFound />} /> */}
         {/*<Route path="*" element={<ErrorPage />} />*/}
       </Routes>
+    </div>
       <Footer />
     </div>
   );

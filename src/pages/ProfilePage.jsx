@@ -1,25 +1,38 @@
 import service from "../services/config.service";
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
+  const [ userDate, setUserDate]  = useState(null);
+  const navigate = useNavigate()
+  //loggedUserID?
+  const findDateByUser = async () => {
+    try {
+      const response = await service.get(`/date/${user}`);
+      setUserDate(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+      
 
+      navigate("/errorPage");
+    }
+  };
+
+  const findUser = async () => {
+    try {
+      const response = await service.get(`/user`);
+      setUser(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+      
+      navigate("/errorPage");
+    }
+  };
   useEffect(() => {
-    const findUser = async () => {
-      try {
-        const response = await service.get(`/user`);
-        setUser(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-        if (error.response.status === 400) {
-          setErrorMessage(error.response.data.errorMessage);
-        }
-
-        navigate("/errorPage");
-      }
-    };
+    findDateByUser();
     findUser();
   }, []);
   if (user === null) {
@@ -28,7 +41,11 @@ const ProfilePage = () => {
   return (
     <div>
       <h2>{user.username}</h2>
-
+        <h2>{userDate.map((eachDate)=>{
+            return(
+            <p key={eachDate._id}>{eachDate.user}</p>
+            )
+        })}</h2>
       <h3>Clica abajo para escoger de los servicios disponibles</h3>
       <Link to={"/service"}>Clica aqui </Link>
       <br />

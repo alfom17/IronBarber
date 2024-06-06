@@ -5,16 +5,33 @@ import { useNavigate } from "react-router-dom";
 function RevisionPage() {
   const [date, setDate] = useState(null);
   const navigate = useNavigate()
-    const handleState = async (id) => {
+  const handleDelete = async (id) => {
+    try {
+        const response = await service.delete(`/date/${id}`)
+    } catch(error){
+        console.log(error);
+    }
+  }
+
+  const handleStateDenied = async (id) => {
+    try {
+        const response = await service.patch(`/date/${id}/denegado`)
+    } catch (error){
+        console.log(error);
+       
+
+        navigate("/errorPage");
+    }
+}
+    const handleStateAccepted = async (id) => {
         try {
             const response = await service.patch(`/date/${id}/aceptado`)
+            
         } catch (error){
             console.log(error);
-            if (error.response.status === 400) {
-              setErrorMessage(error.response.data.errorMessage);
-            }
+            
     
-            //navigate("/errorPage");
+            navigate("/errorPage");
         }
     }
     const findDate = async () => {
@@ -24,11 +41,9 @@ function RevisionPage() {
             console.log(response.data);
       } catch (error) {
         console.log(error);
-        if (error.response.status === 400) {
-          setErrorMessage(error.response.data.errorMessage);
-        }
+        
 
-       // navigate("/errorPage");
+       navigate("/errorPage");
       }
     };
     useEffect(() => {
@@ -42,7 +57,8 @@ function RevisionPage() {
     <div>
         <h2>{date.map((eachDate)=>{
             return (
-                <p key={eachDate._id}>{eachDate.dayAvailable}{" "}{eachDate.hourAvailable}<button onClick={() => handleState(eachDate._id)}>Estado</button></p>
+                <p key={eachDate._id}>{eachDate.dayAvailable}{" "}{eachDate.hourAvailable}<button onClick={() => handleStateAccepted(eachDate._id)}>Aceptar</button><button onClick={() => handleStateDenied(eachDate._id)}>Denegar</button><button onClick={() => handleDelete(eachDate._id)}>Borrar</button></p>
+                
             )
         })}</h2>
     </div>
