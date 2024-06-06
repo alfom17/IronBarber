@@ -9,11 +9,12 @@ function EditPage() {
     const handleHourAvailable = (e)=> setHourAvailable(e.target.value)
 
   const params = useParams();
+  useEffect(()=>{
+      handleDayAvailable()
+      handleHourAvailable()
+      
+  },[])
   const editDate = async () => {
-    useEffect(()=>{
-        handleDayAvailable()
-        handleHourAvailable()
-    },[])
     try {
       const response = await service.patch(`/service/${params.id}`, dayAvailable);
     } catch (error) {
