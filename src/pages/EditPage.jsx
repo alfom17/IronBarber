@@ -3,24 +3,41 @@ import service from "../services/config.service";
 import { useEffect, useState } from "react";
 
 function EditPage() {
-    const [dayAvailable, setDayAvailable] = useState("")
-    const [hourAvailable, setHourAvailable] = useState("")
+    const [dayAvailable, setDayAvailable] = useState(null)
+    const [hourAvailable, setHourAvailable] = useState(null)
     const handleDayAvailable = (e)=> setDayAvailable(e.target.value)
     const handleHourAvailable = (e)=> setHourAvailable(e.target.value)
 
   const params = useParams();
   useEffect(()=>{
-      handleDayAvailable()
-      handleHourAvailable()
+   getDate()
       
   },[])
-  const editDate = async () => {
+  const getDate = async () =>{
     try {
-      const response = await service.patch(`/service/${params.id}`, dayAvailable);
+
+        const response = await service.get(`/date/${params.id}`)
+        console.log(response.data);
+        setDayAvailable(response.data.dayAvailable)
+        setHourAvailable(response.data.hourAvailable)
+    } catch (error){
+        console.log(error);
+    }
+  }
+  const editDate = async () => {
+    const editDate = {
+        dayAvailable:dayAvailable,
+        hourAvailable:hourAvailable
+    }
+    try {
+      const response = await service.patch(`/service/${params.id}`, editDate);
     } catch (error) {
       console.log(error);
     }
   };
+  if ( dayAvailable === null) {
+    return <h1>Loading dates...</h1>
+  }
   return (
       <div>
       <form onSubmit={editDate}>
