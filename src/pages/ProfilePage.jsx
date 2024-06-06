@@ -1,22 +1,24 @@
 import service from "../services/config.service";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
-  const [ userDate, setUserDate]  = useState(null);
-  const navigate = useNavigate()
+  const [userDate, setUserDate] = useState(null);
+  const { loggedUserId } = useContext(AuthContext);
+
+  const navigate = useNavigate();
   //loggedUserID?
   const findDateByUser = async () => {
     try {
-      const response = await service.get(`/date/${user}`);
+      const response = await service.get(`/date/by-user/${loggedUserId}`);
       setUserDate(response.data);
       console.log(response.data);
     } catch (error) {
       console.log(error);
-      
 
-      navigate("/errorPage");
+      //navigate("/errorPage");
     }
   };
 
@@ -27,8 +29,8 @@ const ProfilePage = () => {
       console.log(response.data);
     } catch (error) {
       console.log(error);
-      
-      navigate("/errorPage");
+
+      //navigate("/errorPage");
     }
   };
   useEffect(() => {
@@ -41,16 +43,15 @@ const ProfilePage = () => {
   return (
     <div>
       <h2>{user.username}</h2>
-        <h2>{userDate.map((eachDate)=>{
-            return(
-            <p key={eachDate._id}>{eachDate.user}</p>
-            )
-        })}</h2>
       <h3>Clica abajo para escoger de los servicios disponibles</h3>
       <Link to={"/service"}>Clica aqui </Link>
       <br />
-      <h4>O clica aqui abajo para editar tu cita si ya has concertado una</h4>
-      <Link to={"/date/:id"}>Editar</Link>
+      <h2>
+        {userDate.map((eachDate) => {
+          return <p key={eachDate._id}>{eachDate.dayAvailable}{" "}{eachDate.hourAvailable}{" "}{eachDate.status}<Link to={`/date/${eachDate._id}`}><button>Editar</button></Link></p>;
+        })}
+      </h2>
+      
     </div>
   );
 };

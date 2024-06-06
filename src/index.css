@@ -14,15 +14,19 @@
 }
 nav{
   display: flex;
-  top:0px
+  top:0px;
+  background-color: #535bf2;
+ height: 50px;
+ align-items: center;
 }
 footer{
   display: flex;
   justify-content: space-between;
+  background-color: #535bf2;
 }
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #17171a;
   text-decoration: inherit;
 }
 a:hover {

@@ -8,6 +8,7 @@ function RevisionPage() {
   const handleDelete = async (id) => {
     try {
         const response = await service.delete(`/date/${id}`)
+        navigate(0)
     } catch(error){
         console.log(error);
     }
@@ -20,7 +21,7 @@ function RevisionPage() {
         console.log(error);
        
 
-        navigate("/errorPage");
+        //navigate("/errorPage");
     }
 }
     const handleStateAccepted = async (id) => {
@@ -31,7 +32,7 @@ function RevisionPage() {
             console.log(error);
             
     
-            navigate("/errorPage");
+            //navigate("/errorPage");
         }
     }
     const findDate = async () => {
@@ -43,7 +44,7 @@ function RevisionPage() {
         console.log(error);
         
 
-       navigate("/errorPage");
+       //navigate("/errorPage");
       }
     };
     useEffect(() => {
