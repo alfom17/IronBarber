@@ -9,7 +9,8 @@ const ProfilePage = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [user, setUser] = useState(null);
   const [userDate, setUserDate] = useState(null);
-  const { loggedUserId } = useContext(AuthContext);
+  const { loggedUserId, isAdmin } = useContext(AuthContext);
+
 
   const navigate = useNavigate();
   const handleFileUpload = async (event) => {
@@ -50,7 +51,7 @@ const ProfilePage = () => {
     } catch (error) {
       console.log(error);
 
-      //navigate("/errorPage");
+      navigate("/errorPage");
     }
   };
 
@@ -62,7 +63,7 @@ const ProfilePage = () => {
     } catch (error) {
       console.log(error);
 
-      //navigate("/errorPage");
+      navigate("/errorPage");
     }
   };
   useEffect(() => {
@@ -111,7 +112,7 @@ const ProfilePage = () => {
         {userDate.map((eachDate) => {
           return (
             <p key={eachDate._id}>
-              {eachDate.dayAvailable} {eachDate.hourAvailable} {eachDate.status}
+              {eachDate.dayAvailable} {eachDate.hourAvailable} {eachDate.status} {eachDate.type}
               <Link to={`/date/${eachDate._id}`}>
                 <button>Editar</button>
               </Link>
@@ -119,6 +120,7 @@ const ProfilePage = () => {
           );
         })}
       </h2>
+      
       <Link to={"/service"}><button>Servicios</button></Link>
       <Link to={"/date"}><button>Revision</button></Link>
     </div>

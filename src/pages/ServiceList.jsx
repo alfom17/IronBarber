@@ -12,7 +12,8 @@ function ServiceList(){
         await service.delete(`/service/${id}`)
         navigate(0)
         } catch(error){
-            console.log(error);
+            //console.log(error);
+            navigate("/errorPage")
         }
     }
 
@@ -22,7 +23,8 @@ function ServiceList(){
             setServiced(response.data)
             
         } catch (error){
-            console.log(error);
+            // console.log(error);
+            navigate("/errorPage")
         }
     }
     useEffect(() => {

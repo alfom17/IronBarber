@@ -28,10 +28,10 @@ function LoginPage() {
       console.log(response);
 
       localStorage.setItem("authToken", response.data.authToken);
-
+      
+      navigate(`/user`);
       authenticateUser();
 
-      navigate(`/user`);
     } catch (error) {
       console.log(error);
 

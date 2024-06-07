@@ -11,7 +11,9 @@ function RevisionPage() {
         const response = await service.delete(`/date/${id}`)
         navigate(0)
     } catch(error){
-        console.log(error);
+        //console.log(error);
+        
+        navigate("/errorPage");
     }
   }
 
@@ -30,7 +32,7 @@ function RevisionPage() {
             const response = await service.patch(`/date/${id}/aceptado`)
             
         } catch (error){
-            console.log(error);
+            //console.log(error);
             
     
             navigate("/errorPage");
@@ -42,7 +44,7 @@ function RevisionPage() {
             setDate(response.data);
             console.log(response.data);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
         
 
        navigate("/errorPage");

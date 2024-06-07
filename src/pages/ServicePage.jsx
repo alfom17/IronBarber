@@ -21,7 +21,8 @@ const handleAddService = async (e) => {
     await service.post("/service", newService);
 
   } catch (error){
-    console.log(error);
+    //console.log(error);
+    navigate("/errorPage")
   }
 };
   

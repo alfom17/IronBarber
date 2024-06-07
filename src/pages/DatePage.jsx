@@ -30,7 +30,8 @@ const getService= async(e) =>{
     setServiceArr(response.data)
     console.log(response.data);
  } catch(error){
-    console.log(error);
+    //console.log(error);
+    navigate("/errorPage")
  }
 }
 const handleAddDate= async (e) =>{
@@ -46,7 +47,7 @@ const handleAddDate= async (e) =>{
         await service.post("/date", newDate)
         navigate("/user")
     } catch(error){
-        console.log(error);
+        navigate("/errorPage")
     }
 }
 if (serviceArr === null) {

@@ -1,14 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import service from "../services/config.service";
 import { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
+import { Link } from "react-router-dom";
 
 function EditPage() {
     const [dayAvailable, setDayAvailable] = useState(null)
     const [hourAvailable, setHourAvailable] = useState(null)
     const handleDayAvailable = (e)=> setDayAvailable(e.target.value)
     const handleHourAvailable = (e)=> setHourAvailable(e.target.value)
-
+    const navigate = useNavigate()
   const params = useParams();
   useEffect(()=>{
    getDate()
@@ -22,19 +23,22 @@ function EditPage() {
         setDayAvailable(response.data.dayAvailable)
         setHourAvailable(response.data.hourAvailable)
     } catch (error){
-        console.log(error);
+        //console.log(error);
+        navigate("/errorPage")
     }
   }
   const editDate = async () => {
     const editDate = {
         dayAvailable:dayAvailable,
         hourAvailable:hourAvailable
-    }
-    try {
-      const response = await service.patch(`/date/${params.id}`, editDate);
-    } catch (error) {
-      console.log(error);
-    }
+      }
+      try {
+        const response = await service.patch(`/date/${params.id}`, editDate);
+      } catch (error) {
+        //console.log(error);
+        navigate("/errorPage")
+      }
+      
   };
   if ( dayAvailable === null) {
     return(
@@ -58,6 +62,8 @@ function EditPage() {
       <br />
       <button type="submit">Edita</button>
       </form>
+      <br />
+      <Link to="/user"><button>Volver</button></Link>
     </div>
   );
 }
