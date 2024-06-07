@@ -37,7 +37,7 @@ function SignupPage() {
   };
 
   return (
-    <div>
+    <div className="padding-top">
       <h1>Registrate para poder coger cita</h1>
       <br />
       <form onSubmit={handleSignup}>

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import service from "../services/config.service";
 import { useEffect, useState } from "react";
+import Spinner from "react-bootstrap/Spinner";
 
 function EditPage() {
     const [dayAvailable, setDayAvailable] = useState(null)
@@ -30,26 +31,30 @@ function EditPage() {
         hourAvailable:hourAvailable
     }
     try {
-      const response = await service.patch(`/service/${params.id}`, editDate);
+      const response = await service.patch(`/date/${params.id}`, editDate);
     } catch (error) {
       console.log(error);
     }
   };
   if ( dayAvailable === null) {
-    return <h1>Loading dates...</h1>
+    return(
+        <Spinner animation="border" variant="dark" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+      )
   }
   return (
-      <div>
+      <div className="padding-top">
       <form onSubmit={editDate}>
 
       <label>Edita su dia</label>
       <br />
-      <input type="text" name="dayAvailable" value={dayAvailable}
+      <input type="number" name="dayAvailable" value={dayAvailable}
       onChange={handleDayAvailable}/>
       <br />
       <label>Edita su hora</label>
       <br />
-      <input type="text" name="hourAvailable" value={hourAvailable} onChange={handleHourAvailable} />
+      <input type="number" name="hourAvailable" value={hourAvailable} onChange={handleHourAvailable} />
       <br />
       <button type="submit">Edita</button>
       </form>

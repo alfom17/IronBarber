@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import service from "../services/config.service";
 import { useNavigate } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
 
 function RevisionPage() {
   const [date, setDate] = useState(null);
@@ -52,10 +53,14 @@ function RevisionPage() {
         findDate()
   },[]);
   if ( date === null) {
-    return <h1>Loading dates...</h1>
+    return(
+        <Spinner animation="border" variant="dark" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+      ) 
   }
   return (
-    <div>
+    <div className="padding-top">
         <h2>{date.map((eachDate)=>{
             return (
                 <p key={eachDate._id}>{eachDate.dayAvailable}{" "}{eachDate.hourAvailable}<button onClick={() => handleStateAccepted(eachDate._id)}>Aceptar</button><button onClick={() => handleStateDenied(eachDate._id)}>Denegar</button><button onClick={() => handleDelete(eachDate._id)}>Borrar</button></p>

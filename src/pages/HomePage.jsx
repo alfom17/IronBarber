@@ -6,7 +6,7 @@ function HomePage(){
 
 
     return (
-        <div>
+        <div className="padding-top">
             <div>  
                 <h2>Necesitamos que se registre para coger la cita</h2>
 

@@ -43,7 +43,7 @@ function LoginPage() {
     }
   };
   return (
-    <div>
+    <div className="padding-top">
       <h1>Inicia Sesion</h1>
       <form onSubmit={handleLogin}>
         <label>Email</label>
