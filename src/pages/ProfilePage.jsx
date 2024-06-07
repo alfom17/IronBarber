@@ -119,6 +119,8 @@ const ProfilePage = () => {
           );
         })}
       </h2>
+      <Link to={"/service"}><button>Servicios</button></Link>
+      <Link to={"/date"}><button>Revision</button></Link>
     </div>
   );
 };

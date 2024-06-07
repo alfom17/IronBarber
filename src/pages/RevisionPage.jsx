@@ -22,7 +22,7 @@ function RevisionPage() {
         console.log(error);
        
 
-        //navigate("/errorPage");
+        navigate("/errorPage");
     }
 }
     const handleStateAccepted = async (id) => {
@@ -33,7 +33,7 @@ function RevisionPage() {
             console.log(error);
             
     
-            //navigate("/errorPage");
+            navigate("/errorPage");
         }
     }
     const findDate = async () => {
@@ -45,7 +45,7 @@ function RevisionPage() {
         console.log(error);
         
 
-       //navigate("/errorPage");
+       navigate("/errorPage");
       }
     };
     useEffect(() => {

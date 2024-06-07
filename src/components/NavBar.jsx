@@ -15,8 +15,8 @@ function NavBar() {
   };
   return (
     <nav>
-      <Link to="/"><img src={icono} alt="" style={{width: 50}}/></Link>
-      <h3 class="title">IronBarber</h3>
+      <Link to="/user"><img src={icono} alt="" style={{width: 50}}/></Link>
+      <h3 className="title">IronBarber</h3>
       <button onClick={handleLogOut}>Cerrar Sesión</button>
     </nav>
   );

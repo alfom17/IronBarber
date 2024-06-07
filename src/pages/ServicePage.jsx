@@ -1,12 +1,14 @@
-import { Router, useNavigate } from "react-router-dom";
-import React, { useContext, useEffect } from "react";
+
+import React from "react";
 import { useState } from "react";
 import service from "../services/config.service";
-import { AuthContext } from "../context/auth.context";
+
+import { Link } from "react-router-dom";
 
 function ServicePage() {
  const [type, setType]= useState("")
 
+ const handleTypeChange = (e) => setType(e.target.value)
  
   
   
@@ -15,17 +17,30 @@ const handleAddService = async (e) => {
   const newService={
     type:type
   }
-  await service.post
+  try{
+    await service.post("/service", newService);
+
+  } catch (error){
+    console.log(error);
+  }
 };
   
   return (
     <div className="padding-top">
-      <h1>Escoge de los servicios disponibles</h1>
+      <h1>Añade un servicio</h1>
       <form onSubmit={handleAddService}>
-        
+        <label>Servicio</label>
+        <input
+        type="text"
+        name="type"
+        value={type}
+        onChange={handleTypeChange}
+        />
+        <button type="submit">lele pancha</button>
       </form>
+      <Link to="/service-list"><button>A la lista</button></Link>
     </div>
   );
 }
-}
+
 export default ServicePage;
