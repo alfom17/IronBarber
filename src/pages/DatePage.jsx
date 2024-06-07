@@ -34,7 +34,7 @@ const getService= async(e) =>{
  }
 }
 const handleAddDate= async (e) =>{
-    
+    e.preventDefault()
     const newDate = {
         dayAvailable:dayAvailable,
         hourAvailable:hourAvailable,
@@ -42,7 +42,7 @@ const handleAddDate= async (e) =>{
     };
 
     try {
-        if (serviceId !== null&&serviceId !=="")
+        //if (serviceId !== null&&serviceId !=="")
         await service.post("/date", newDate)
         navigate("/user")
     } catch(error){

@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import Error from "./pages/Error";
 import RevisionPage from "./pages/RevisionPage";
 import ServiceList from "./pages/ServiceList";
+import AdminError from "./pages/AdminErorPage"
 
 import OnlyPrivate from "./components/OnlyPrivate";
 import OnlyAdmin from "./components/OnlyAdmin";
@@ -30,11 +31,12 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/user" element={<OnlyPrivate><ProfilePage /></OnlyPrivate>} />
-        <Route path="/service" element={<OnlyPrivate><ServicePage /></OnlyPrivate>} />
-        <Route path="/date" element={<OnlyPrivate><RevisionPage /></OnlyPrivate>} />
-        <Route path="/service-list" element={<OnlyPrivate><ServiceList/></OnlyPrivate>} />
+        <Route path="/service" element={<OnlyAdmin><ServicePage /></OnlyAdmin>} />
+        <Route path="/date" element={<OnlyAdmin><RevisionPage /></OnlyAdmin>} />
+        <Route path="/service-list" element={<OnlyAdmin><ServiceList/></OnlyAdmin>} />
         <Route path="/date/:id" element={<OnlyPrivate><EditPage /></OnlyPrivate>} />
         <Route path="/add-date" element={<OnlyPrivate><DatePage /></OnlyPrivate>} />
+        <Route path="/adminError" element={<AdminError />} />
         <Route path="/errorPage" element={<Error />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -12,7 +12,7 @@ function OnlyAdmin(props) {
     return props.children
   } else {
     
-    return <Navigate to="/login"/>
+    return <Navigate to="/adminError"/>
   }
 
 
