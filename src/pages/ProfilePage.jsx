@@ -9,7 +9,8 @@ const ProfilePage = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [user, setUser] = useState(null);
   const [userDate, setUserDate] = useState(null);
-  const { loggedUserId, isAdmin } = useContext(AuthContext);
+  const { loggedUserId } = useContext(AuthContext);
+  const { isAdmin } = useContext(AuthContext);
 
 
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ const ProfilePage = () => {
       navigate("/errorPage");
     }
   };
+
 
   const findUser = async () => {
     try {
@@ -119,10 +121,15 @@ const ProfilePage = () => {
             </p>
           );
         })}
+        
       </h2>
-      
+      {isAdmin&&
+      <div>
+
       <Link to={"/service"}><button>Servicios</button></Link>
       <Link to={"/date"}><button>Revision</button></Link>
+      </div>
+      }
     </div>
   );
 };

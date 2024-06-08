@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
+import { useNavigate } from "react-router-dom";
 
 function HomePage(){
+const {isLoggedIn } = useContext(AuthContext)
 
 
     return (
         <div className="padding-top">
-            <div>  
+                {!isLoggedIn&&
+            <div> 
                 <h2>Necesitamos que se registre para coger la cita</h2>
 
                 <Link to={"/signup"}>Registrate Aqui</Link>
@@ -20,6 +24,14 @@ function HomePage(){
                 
             
             </div>
+                } 
+                {isLoggedIn&&
+                <div>
+                    <Link to={"/user"}>
+                    <button>Entra a tu perfil</button>
+                    </Link>
+                </div>
+                }
         </div>
     )
 }

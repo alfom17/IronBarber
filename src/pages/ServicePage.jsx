@@ -37,7 +37,7 @@ const handleAddService = async (e) => {
         value={type}
         onChange={handleTypeChange}
         />
-        <button type="submit">lele pancha</button>
+        <button type="submit">Añadir</button>
       </form>
       <Link to="/service-list"><button>A la lista</button></Link>
     </div>

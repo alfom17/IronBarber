@@ -21,6 +21,7 @@ function ServiceList(){
         try {
             const response = await service.get("/service")
             setServiced(response.data)
+            //console.log(response.data);
             
         } catch (error){
             // console.log(error);

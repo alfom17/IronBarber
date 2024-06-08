@@ -29,8 +29,8 @@ function LoginPage() {
 
       localStorage.setItem("authToken", response.data.authToken);
       
-      navigate(`/user`);
       authenticateUser();
+      navigate(`/`);
 
     } catch (error) {
       console.log(error);

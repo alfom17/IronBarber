@@ -15,7 +15,7 @@ const [serviceArr, setServiceArr] = useState("")
 
 const navigate= useNavigate()
 
-
+const handleSeviceId = (e)=> setServiceId(e.target.value)
 const  handleDayAvailable = (e)=> setDayAvailable(e.target.value);
 const  handleHourAvailable = (e)=> setHourAvailable(e.target.value)
 
@@ -78,7 +78,8 @@ if (serviceArr === null) {
                 onChange={handleHourAvailable}
                 />
                 <br />
-                <select name="service" onChange={(e)=>setServiceId(e.target.value)}>
+                <select name="service" onChange={handleSeviceId}>
+                    <option value={1}>Selecciona un servicio</option>
                 {serviceArr&&serviceArr.map((eachService)=>{
                     return (
                         <option value={eachService._id}>{eachService.type}</option>

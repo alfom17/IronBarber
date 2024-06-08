@@ -65,7 +65,7 @@ function RevisionPage() {
     <div className="padding-top">
         <h2>{date.map((eachDate)=>{
             return (
-                <p key={eachDate._id}>{eachDate.dayAvailable}{" "}{eachDate.hourAvailable}<button onClick={() => handleStateAccepted(eachDate._id)}>Aceptar</button><button onClick={() => handleStateDenied(eachDate._id)}>Denegar</button><button onClick={() => handleDelete(eachDate._id)}>Borrar</button></p>
+                <p key={eachDate._id}>{eachDate.dayAvailable}{" "}{eachDate.hourAvailable}{" "}{eachDate.user.username}{" "}{eachDate.serviceId.type}<button onClick={() => handleStateAccepted(eachDate._id)}>Aceptar</button><button onClick={() => handleStateDenied(eachDate._id)}>Denegar</button><button onClick={() => handleDelete(eachDate._id)}>Borrar</button></p>
                 
             )
         })}</h2>

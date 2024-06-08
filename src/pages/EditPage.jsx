@@ -33,6 +33,7 @@ function EditPage() {
         hourAvailable:hourAvailable
       }
       try {
+        navigate("/user")
         const response = await service.patch(`/date/${params.id}`, editDate);
       } catch (error) {
         //console.log(error);
