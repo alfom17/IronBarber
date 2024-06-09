@@ -65,7 +65,7 @@ if (serviceArr === null) {
             <form onSubmit={handleAddDate}>
                 <label>Dia</label>
                 <input
-                type="number"
+                type="date"
                 name="day"
                 value={dayAvailable}
                 onChange={handleDayAvailable}

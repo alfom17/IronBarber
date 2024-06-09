@@ -12,11 +12,10 @@ const ProfilePage = () => {
   const { loggedUserId } = useContext(AuthContext);
   const { isAdmin } = useContext(AuthContext);
 
-
   const navigate = useNavigate();
   const handleFileUpload = async (event) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
-  
+    
     if (!event.target.files[0]) {
       // to prevent accidentally clicking the choose file button and not selecting a file
       return;
@@ -27,21 +26,39 @@ const ProfilePage = () => {
     uploadData.append("image", event.target.files[0]);
     //                   |
     //     this name needs to match the name used in the middleware in the backend => uploader.single("image")
-  
+
     try {
-      const response = await service.post("http://localhost:5005/api/upload", uploadData)
+      const response = await service.post(
+        "http://localhost:5005/api/upload",
+        uploadData
+      );
       // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
-  
+
       setImageUrl(response.data.imageUrl);
+
+      if (imageUrl !== null) {
+        patchImage(imageUrl);
+      }
       //                          |
       //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
-  
+
       setIsUploading(false); // to stop the loading animation
     } catch (error) {
       console.log(error);
       //navigate("/error");
     }
   };
+
+  const patchImage= async () => {
+    const patchImageUrl={
+      imageUrl:imageUrl
+    }
+    try {
+      await service.patch(`/${loggedUserId}/image`,  patchImageUrl );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   //loggedUserID?
   const findDateByUser = async () => {
@@ -55,7 +72,6 @@ const ProfilePage = () => {
       navigate("/errorPage");
     }
   };
-
 
   const findUser = async () => {
     try {
@@ -88,48 +104,55 @@ const ProfilePage = () => {
   }
   return (
     <div>
-     
+      <div className="padding-top">
+        <label>Image: </label>
+        <input
+          type="file"
+          name="image"
+          onChange={handleFileUpload}
+          disabled={isUploading}
+        />
+        {/* below disabled prevents the user from attempting another upload while one is already happening */}
+      </div>
 
-<div className="padding-top">
-  <label >Image: </label>
-  <input
-    type="file"
-    name="image"
-    onChange={handleFileUpload}
-    disabled={isUploading}
-  />
-  {/* below disabled prevents the user from attempting another upload while one is already happening */}
-</div>
+      {/* to render a loading message or spinner while uploading the picture */}
+      {isUploading ? <h3>... uploading image</h3> : null}
 
-{/* to render a loading message or spinner while uploading the picture */}
-{isUploading ? <h3>... uploading image</h3> : null}
+      {/* below line will render a preview of the image from cloudinary */}
+      {imageUrl ? (
+        <div>
+          <img src={imageUrl} alt="img" width={200} />
+        </div>
+      ) : null}
 
-{/* below line will render a preview of the image from cloudinary */}
-{imageUrl ? (<div><img src={imageUrl} alt="img" width={200} /></div>) : null}
       <h2>{user.username}</h2>
       <h3>Clica abajo para escoger de los servicios disponibles</h3>
       <Link to={"/add-date"}>Clica aqui </Link>
       <br />
+      <p>{imageUrl}</p>
       <h2>
         {userDate.map((eachDate) => {
           return (
             <p key={eachDate._id}>
-              {eachDate.dayAvailable} {eachDate.hourAvailable} {eachDate.status} {eachDate.type}
+              {eachDate.dayAvailable} {eachDate.hourAvailable} {eachDate.status}{" "}
+              {eachDate.type}
               <Link to={`/date/${eachDate._id}`}>
                 <button>Editar</button>
               </Link>
             </p>
           );
         })}
-        
       </h2>
-      {isAdmin&&
-      <div>
-
-      <Link to={"/service"}><button>Servicios</button></Link>
-      <Link to={"/date"}><button>Revision</button></Link>
-      </div>
-      }
+      {isAdmin && (
+        <div>
+          <Link to={"/service"}>
+            <button>Servicios</button>
+          </Link>
+          <Link to={"/date"}>
+            <button>Revision</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

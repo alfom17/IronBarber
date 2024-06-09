@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
-
+import icono from "../assets/Gigachad-Transparent.png"
 function HomePage(){
 const {isLoggedIn } = useContext(AuthContext)
 
@@ -27,6 +27,7 @@ const {isLoggedIn } = useContext(AuthContext)
                 } 
                 {isLoggedIn&&
                 <div>
+                    
                     <Link to={"/user"}>
                     <button>Entra a tu perfil</button>
                     </Link>
