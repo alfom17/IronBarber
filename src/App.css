@@ -101,3 +101,14 @@ h2{
   padding-left: 20%;
   padding-right: 20%;
 }
+
+h3{
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.padding{
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-bottom: 10%;
+}
