@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import service from "../services/config.service";
+import icono from "../assets/Gigachad-Transparent.png";
 
 const AuthContext = createContext();
 
@@ -52,7 +53,16 @@ function AuthWrapper(props) {
   }, []);
 
   if (isAuthenticating === true) {
-    return <h3>Validando usuario</h3>;
+    return (
+      <p className="centered">
+        <img
+          src={icono}
+          alt="icono"
+          className="animate__animated animate__flip animate__infinite animate__slow loadingImg padding-top"
+        />
+        <h3 className="padding-top">Validando usuario...</h3>
+      </p>
+    );
   }
   return (
     <AuthContext.Provider value={passedContext}>

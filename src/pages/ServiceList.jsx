@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import service from "../services/config.service";
 import { useNavigate } from "react-router-dom";
-import Spinner from "react-bootstrap/Spinner";
+import icono from "../assets/Gigachad-Transparent.png";
 
 function ServiceList(){
     const [serviced, setServiced] = useState(null)
@@ -33,11 +33,16 @@ function ServiceList(){
     },[])
 
     if ( serviced === null) {
-        return(
-            <Spinner animation="border" variant="dark" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-          ) 
+        return (
+            <p className="centered">
+              <img
+                src={icono}
+                alt="icono"
+                className="animate__animated animate__flip animate__infinite animate__slow loadingImg padding-top"
+              />
+              <h3 className="padding-top">Cargando...</h3>
+            </p>
+          );
       }
       
       return (

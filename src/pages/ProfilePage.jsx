@@ -2,8 +2,8 @@ import service from "../services/config.service";
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import Spinner from "react-bootstrap/Spinner";
-import { Button } from "react-bootstrap";
+import icono from "../assets/Gigachad-Transparent.png";
+
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -91,16 +91,26 @@ const ProfilePage = () => {
   }, []);
   if (userDate === null) {
     return (
-      <Spinner animation="border" variant="dark" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <p className="centered">
+        <img
+          src={icono}
+          alt="icono"
+          className="animate__animated animate__flip animate__infinite animate__slow loadingImg padding-top"
+        />
+        <h3 className="padding-top">Cargando...</h3>
+      </p>
     );
   }
   if (user === null) {
     return (
-      <Spinner animation="border" variant="dark" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <p className="centered">
+        <img
+          src={icono}
+          alt="icono"
+          className="animate__animated animate__flip animate__infinite animate__slow loadingImg padding-top"
+        />
+        <h3 className="padding-top">Cargando...</h3>
+      </p>
     );
   }
   return (
@@ -112,8 +122,8 @@ const ProfilePage = () => {
 
       <img src={user.imageUrl} alt="profile image" style={{width: 100}}></img>
       <h2>{user.username}</h2>
-      <h3>Clica abajo para escoger de los servicios disponibles</h3>
-      <Link to={"/add-date"}>Clica aqui </Link>
+      <h3>Clica abajo para escoger el dia y los servicios disponibles</h3>
+      <Link to={"/add-date"}><button>Clica Aqui</button> </Link>
       <br />
       <h2>
         {userDate.map((eachDate) => {
