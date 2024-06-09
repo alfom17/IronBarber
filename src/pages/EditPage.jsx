@@ -35,6 +35,7 @@ function EditPage() {
       try {
         navigate("/user")
         const response = await service.patch(`/date/${params.id}`, editDate);
+        
       } catch (error) {
         //console.log(error);
         navigate("/errorPage")
@@ -52,12 +53,12 @@ function EditPage() {
       <div className="padding-top">
       <form onSubmit={editDate}>
 
-      <label>Edita su dia</label>
+      <label>Edite su dia</label>
       <br />
-      <input type="number" name="dayAvailable" value={dayAvailable}
+      <input type="date" name="dayAvailable" value={dayAvailable}
       onChange={handleDayAvailable}/>
       <br />
-      <label>Edita su hora</label>
+      <label>Edite su hora</label>
       <br />
       <input type="number" name="hourAvailable" value={hourAvailable} onChange={handleHourAvailable} />
       <br />

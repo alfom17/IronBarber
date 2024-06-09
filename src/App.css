@@ -44,6 +44,7 @@ p{
 button{
   background-color: rgb(41, 41, 41) ;
   border: 0;
+  padding: 10px;
 }
 
 a{
@@ -55,4 +56,11 @@ a{
 }
 .padding-top{
   padding-top: 4rem;
+}
+.margin-top{
+  margin-top: 3rem;
+}
+
+.smallImg{
+  height: 200px;
 }

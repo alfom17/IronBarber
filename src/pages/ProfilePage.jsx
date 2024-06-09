@@ -54,7 +54,8 @@ const ProfilePage = () => {
       imageUrl:imageUrl
     }
     try {
-      await service.patch(`/${loggedUserId}/image`,  patchImageUrl );
+      await service.post(`/user/image`,  patchImageUrl );
+      
     } catch (error) {
       console.log(error);
     }
@@ -103,38 +104,22 @@ const ProfilePage = () => {
     );
   }
   return (
-    <div>
-      <div className="padding-top">
-        <label>Image: </label>
-        <input
-          type="file"
-          name="image"
-          onChange={handleFileUpload}
-          disabled={isUploading}
-        />
-        {/* below disabled prevents the user from attempting another upload while one is already happening */}
-      </div>
+    <div className="padding-top">
+      
 
-      {/* to render a loading message or spinner while uploading the picture */}
-      {isUploading ? <h3>... uploading image</h3> : null}
+        
 
-      {/* below line will render a preview of the image from cloudinary */}
-      {imageUrl ? (
-        <div>
-          <img src={imageUrl} alt="img" width={200} />
-        </div>
-      ) : null}
 
+      <img src={user.imageUrl} alt="profile image" style={{width: 100}}></img>
       <h2>{user.username}</h2>
       <h3>Clica abajo para escoger de los servicios disponibles</h3>
       <Link to={"/add-date"}>Clica aqui </Link>
       <br />
-      <p>{imageUrl}</p>
       <h2>
         {userDate.map((eachDate) => {
           return (
             <p key={eachDate._id}>
-              {eachDate.dayAvailable} {eachDate.hourAvailable} {eachDate.status}{" "}
+              Su cita del {eachDate.dayAvailable} a las {eachDate.hourAvailable} horas esta {eachDate.status}{" "}
               {eachDate.type}
               <Link to={`/date/${eachDate._id}`}>
                 <button>Editar</button>
@@ -153,6 +138,27 @@ const ProfilePage = () => {
           </Link>
         </div>
       )}
+      <div>
+        <label>Image: </label>
+        <input
+          type="file"
+        name="image"
+      onChange={handleFileUpload}
+    disabled={isUploading}
+  />
+        <button onClick={patchImage}>Confirmar</button>
+        {/* below disabled prevents the user from attempting another upload while one is already happening */}
+      </div>
+
+{/* to render a loading message or spinner while uploading the picture */}
+{isUploading ? <h3>... uploading image</h3> : null}
+
+{/* below line will render a preview of the image from cloudinary */}
+{imageUrl ? (
+  <div>
+<img src={imageUrl} alt="img" width={200} />
+</div>
+) : null}
     </div>
   );
 };
