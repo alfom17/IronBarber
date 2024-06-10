@@ -5,6 +5,7 @@ import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import icono from "../assets/Gigachad-Transparent.png"
 import 'animate.css'
+import HairCarousel from "../components/Caruosels";
 
 function HomePage(){
 const {isLoggedIn } = useContext(AuthContext)
@@ -14,6 +15,9 @@ const {isLoggedIn } = useContext(AuthContext)
         <div className="padding-top">
                 {!isLoggedIn&&
             <div> 
+                <h2>Algunos de nuestros clientes mas satisfechos</h2>
+                <HairCarousel />
+
                 <h2>Necesitamos que se registre para coger la cita</h2>
 
                 <Link to={"/signup"}>Registrate Aqui</Link>
@@ -22,7 +26,7 @@ const {isLoggedIn } = useContext(AuthContext)
 
                 <h3>Ya estas registrado?</h3>
 
-                <Link to={"/login"}>Accede aqui</Link>
+                <Link to={"/login"} className="padding">Accede aqui</Link>
                 
             
             </div>
